@@ -120,10 +120,10 @@ def ask_move(board, current_side, turn):
             continue
 
         print("Valid moves: " + ", ".join(index_to_square(r, c) for r, c in moves))
-        render_board(board)
+        render_board(board, highlights=set(moves))
 
         while True:
-            text = input("Move to (or 'back' to pick another piece or 'quit' to quit): ")
+            text = input("Move to (or 'back' to pick another piece): ")
             if text.strip().lower() == "back":
                 break
             dst = parse_square(text)
@@ -141,14 +141,10 @@ def apply_move(board, src, dst):
 
 side = "upper" # Side that moves first
 turn = "Yellow"
-quit = False
 
 while True:
     render_board(board)
     src, dst = ask_move(board, side, turn)
-    if quit == True:
-        break
-    else:
-        apply_move(board, src, dst)
-        side = "upper" if side == "lower" else "lower"
-        turn = "Yellow" if side == "upper" else "Blue"
+    apply_move(board, src, dst)
+    side = "upper" if side == "lower" else "lower"
+    turn = "Yellow" if side == "upper" else "Blue"
