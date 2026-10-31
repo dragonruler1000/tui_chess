@@ -70,7 +70,7 @@ def queen_moves(board, row, col): return slide(board, row, col, BISHOP_DIRS + RO
 def king_moves(board, row, col): # The king has the same movement as the queen just it can only move 1 space at a time so this is basicly the slide function but without the loop
     me = piece_side(board[row][col])
     moves = []
-    for dr, dc in [(0,-1),(0,1),(-1,0),(-1,0),(1,0),(1,0),(0,-1),(0,1)]: # Can't just use the Rook and bishop dirs tables withoug refactoring the code.
+    for dr, dc in [(-1,0),(1,0),(0,-1),(0,1),(-1,-1),(-1,1),(1,-1),(1,1)]: # Can't just use the Rook and bishop dirs tables withoug refactoring the code.
         r, c = row + dr, col + dc
         if not on_board(r, c):
             continue
